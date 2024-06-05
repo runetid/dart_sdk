@@ -1,39 +1,55 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
-
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages).
-
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages).
--->
-
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+Runet.id dart sdk
 
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+contain http client
 
 ## Getting started
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+Get api key and secret from runet.id manager
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
-
 ```dart
-const like = 'sample';
+
+import 'package:runetid_sdk/http_client.dart';
+import 'package:runetid_sdk/models/login_model.dart';
+import 'package:runetid_sdk/models/user.dart';
+
+final HttpClient client = HttpClient(apiKey, apiSecret);
+
+
+
+Future<User?> userLogin(LoginModel data) {
+  return httpClient
+      .post("/user/login", jsonEncode(data.toJson()))
+      .then((resp) {
+    if (resp.statusCode != 200) {
+      return null;
+    }
+
+    var r = resp.data as Map<String, dynamic>;
+
+    var tokenModel = LoginResponse.fromJson(r['data']);
+
+    return userFetchByToken(tokenModel.token);
+  });
+}
+
+Future<User?> userFetchByToken(String token) async {
+  var user = await httpClient.getUserByToken(token);
+
+  if (user == null) {
+    return null;
+  }
+
+  this.user = user;
+
+  sharedPreferences.setString('USER', jsonEncode(user.toJson()));
+  sharedPreferences.setString('TOKEN', token);
+  httpClient.setAuthToken(token);
+
+  return user;
+}
+
 ```
-
-## Additional information
-
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
