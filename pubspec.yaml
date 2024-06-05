@@ -1,7 +1,9 @@
 name: runetid_sdk
 description: "Runet.id dart sdk."
 version: 0.0.2
-homepage: https://github.com/runetid/dart_sdk
+homepage: https://openitstudio.ru
+repository: https://github.com/runetid/dart_sdk
+issue_tracker: https://github.com/runetid/dart_sdk/issues
 
 environment:
   sdk: '>=3.4.1 <4.0.0'
