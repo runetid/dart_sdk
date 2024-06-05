@@ -1,6 +1,6 @@
 name: runetid_sdk
 description: "Runet.id dart sdk."
-version: 0.0.1
+version: 0.0.2
 homepage: https://github.com/runetid/dart_sdk
 
 environment:
@@ -58,3 +58,11 @@ flutter:
   #
   # For details regarding fonts in packages, see
   # https://flutter.dev/custom-fonts/#from-packages
+
+platforms:
+  android:
+  ios:
+  linux:
+  macos:
+  web:
+  windows:
