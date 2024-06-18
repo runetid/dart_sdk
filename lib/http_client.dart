@@ -170,6 +170,54 @@ class HttpClient {
     }
   }
 
+  Future<List<EventParticipant>?> getEventParticipants({
+    int? eventId,
+    int? runetId,
+    int? userId,
+    String? email,
+    String? username,
+  }) async {
+    if (runetId == null && userId == null && email == null && username == null && eventId == null) {
+      return null;
+    }
+
+    Uri uri = Uri.parse("/event/$eventId/participant/list?limit=100&offset=0");
+
+    if (runetId != null) {
+      uri = uri.replace(queryParameters: {"filter[runet_id]": "$runetId"});
+    }
+    if (userId != null) {
+      uri = uri.replace(queryParameters: {"filter[user_id]": "$userId"});
+    }
+    if (email != null) {
+      uri = uri.replace(queryParameters: {"filter[mail]": email});
+    }
+    if (username != null) {
+      uri = uri.replace(queryParameters: {"filter[username]": username});
+    }
+    if (eventId != null) {
+      uri = uri.replace(queryParameters: {"filter[event_id]": "$eventId"});
+    }
+
+    final response = await get(uri.query);
+
+    if (response.statusCode == 200) {
+      final res = response.data;
+
+      var data = res['data'] as List<dynamic>;
+
+      if (data.isEmpty) {
+        return null;
+      }
+
+      List<EventParticipant> participants = data.map((e) => EventParticipant.fromJson(e as Map<String, dynamic>)).toList();
+
+      return participants;
+    } else {
+      throw Exception('Failed to load album');
+    }
+  }
+
   Future<Future<Response>> setEventAccess(int eventId, int userId) async => post("/access", {"user_id": userId, "event_id": eventId});
 
   Future<Access?> getLastVisit(int eventId, int userId) async {
@@ -205,8 +253,6 @@ class HttpClient {
     final response = await get("/event/podcast/list?limit=$limit&offset=$offset&filter[event_id]=$eventIid");
 
     if (response.statusCode == 200) {
-
-
       final data = response.data["data"] as List<dynamic>;
 
       List<Podcast> result =
