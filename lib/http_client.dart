@@ -176,30 +176,32 @@ class HttpClient {
     int? userId,
     String? email,
     String? username,
+    int limit = 10,
+    int offset = 0,
   }) async {
     if (runetId == null && userId == null && email == null && username == null && eventId == null) {
       return null;
     }
 
-    Uri uri = Uri.parse("/event/$eventId/participant/list?limit=100&offset=0");
+    String uri = "";
 
     if (runetId != null) {
-      uri = uri.replace(queryParameters: {"filter[runet_id]": "$runetId"});
+      uri = "$uri&filter[runet_id]=$runetId";
     }
     if (userId != null) {
-      uri = uri.replace(queryParameters: {"filter[user_id]": "$userId"});
+      uri = "$uri&filter[user_id]=$userId";
     }
     if (email != null) {
-      uri = uri.replace(queryParameters: {"filter[mail]": email});
+      uri = "$uri&filter[mail]=$email";
     }
     if (username != null) {
-      uri = uri.replace(queryParameters: {"filter[username]": username});
+      uri = "$uri&filter[username]=$username";
     }
     if (eventId != null) {
-      uri = uri.replace(queryParameters: {"filter[event_id]": "$eventId"});
+      uri = "$uri&filter[event_id]=$eventId";
     }
 
-    final response = await get(uri.query);
+    final response = await get("/event/$eventId/participant/list?limit=$limit&offset=$offset$uri");
 
     if (response.statusCode == 200) {
       final res = response.data;
