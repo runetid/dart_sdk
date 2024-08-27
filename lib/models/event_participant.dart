@@ -16,13 +16,13 @@ class EventParticipant {
   int roleId;
   @JsonKey(name: "created_at")
   String createdAt;
-
-  // Map<String, dynamic> attributes;
+  @JsonKey(name: "attributes")
+  Map<String, dynamic>? attributes;
 
   User user;
   EventRole role;
 
-  EventParticipant(this.id, this.user, this.role, this.eventId, this.createdAt, this.roleId, this.userId);
+  EventParticipant(this.id, this.user, this.role, this.eventId, this.createdAt, this.roleId, this.userId, this.attributes);
 
 
   static EventParticipant fromJson(Map<String, dynamic> json) => _$EventParticipantFromJson(json);

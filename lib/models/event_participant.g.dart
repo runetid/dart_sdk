@@ -15,6 +15,7 @@ EventParticipant _$EventParticipantFromJson(Map<String, dynamic> json) =>
       json['created_at'] as String,
       (json['role_id'] as num).toInt(),
       (json['user_id'] as num).toInt(),
+      json['attributes'] as Map<String, dynamic>?,
     );
 
 Map<String, dynamic> _$EventParticipantToJson(EventParticipant instance) =>
@@ -24,6 +25,7 @@ Map<String, dynamic> _$EventParticipantToJson(EventParticipant instance) =>
       'user_id': instance.userId,
       'role_id': instance.roleId,
       'created_at': instance.createdAt,
+      'attributes': instance.attributes,
       'user': instance.user,
       'role': instance.role,
     };
