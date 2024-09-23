@@ -78,15 +78,9 @@ class HttpClient {
     return await client.delete(server + uri);
   }
 
-  Event event() {
-    return Event(this);
-  }
+  Event get event => Event(this);
 
-  User user() {
-    return User(this);
-  }
+  User get user => User(this);
 
-  Access access() {
-    return Access(this);
-  }
+  Access get access => Access(this);
 }
