@@ -265,4 +265,26 @@ class HttpClient {
       return null;
     }
   }
+
+  Future<Badge?> setBadge(EventParticipant participant, int operatorId) async {
+
+    var data = {
+      "event_id": participant.eventId,
+      "operator_id" : operatorId,
+      "user_id": participant.userId,
+      "role_id": participant.roleId
+    };
+
+    final response = await post("/storage/badge", jsonEncode(data));
+
+    if (response.statusCode == 200) {
+      final data = response.data["data"] as Map<String, dynamic>;
+
+      Badge result = Badge.fromJson(data);
+
+      return result;
+    } else {
+      return null;
+    }
+  }
 }
