@@ -37,7 +37,7 @@ Future<User?> userLogin(LoginModel data) {
 }
 
 Future<User?> userFetchByToken(String token) async {
-  var user = await httpClient.getUserByToken(token);
+  var user = await httpClient.user.getUserByToken(token);
 
   if (user == null) {
     return null;

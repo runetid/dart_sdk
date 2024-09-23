@@ -1,3 +1,11 @@
+## 1.0.1
+
+* Call facades functions via getters
+
+## 1.0.0
+
+* Group specific functions to facades
+
 ## 0.0.1
 
 * Add base models
