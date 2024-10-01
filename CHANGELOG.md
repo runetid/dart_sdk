@@ -1,3 +1,7 @@
+## 1.0.2
+
+* Fetch event roles
+
 ## 1.0.1
 
 * Call facades functions via getters

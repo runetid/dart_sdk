@@ -10,7 +10,7 @@ EventRole _$EventRoleFromJson(Map<String, dynamic> json) => EventRole(
       (json['id'] as num).toInt(),
       json['title'] as String,
       json['code'] as String,
-      json['color'] as String,
+      json['color'] == null ? '#228B22' : json['color'] as String,
     )..validPeriod = (json['valid_period'] as num?)?.toInt();
 
 Map<String, dynamic> _$EventRoleToJson(EventRole instance) => <String, dynamic>{

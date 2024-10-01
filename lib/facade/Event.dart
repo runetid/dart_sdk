@@ -1,5 +1,6 @@
 import 'package:intl/intl.dart';
 import 'package:runetid_sdk/facade/Facade.dart';
+import 'package:runetid_sdk/models/even_role.dart';
 import 'package:runetid_sdk/models/event.dart' as model;
 import 'package:runetid_sdk/models/event_participant.dart';
 import 'package:runetid_sdk/models/podcast.dart';
@@ -140,6 +141,19 @@ class Event extends Facade {
       return participants;
     } else {
       throw Exception('Failed to load participants');
+    }
+  }
+
+  Future<List<EventRole>?> getRoles(int eventId) async {
+    final response = await client.get("/event/roles/$eventId/list?limit=100&offset=0");
+
+    if (response.statusCode == 200) {
+      final res = response.data;
+      var list = res['data'] as List<dynamic>;
+      var roles = list.map((e) => EventRole.fromJson(e)).toList();
+      return roles;
+    } else {
+      throw Exception('Failed to load album');
     }
   }
 }
