@@ -1,6 +1,7 @@
 ## 1.0.2
 
 * Fetch event roles
+* Update participant method
 
 ## 1.0.1
 

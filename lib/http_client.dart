@@ -70,6 +70,10 @@ class HttpClient {
     return await client.post(server + uri, data: body);
   }
 
+  Future<Response> put(String uri, Object? body) async {
+    return await client.put(server + uri, data: body);
+  }
+
   Future<Response> get(String uri) async {
     return await client.get(server + uri);
   }

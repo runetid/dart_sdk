@@ -4,6 +4,7 @@ import 'package:runetid_sdk/models/even_role.dart';
 import 'package:runetid_sdk/models/event.dart' as model;
 import 'package:runetid_sdk/models/event_participant.dart';
 import 'package:runetid_sdk/models/podcast.dart';
+import 'package:runetid_sdk/models/user_update_model.dart';
 
 class Event extends Facade {
   Event(super.client);
@@ -155,5 +156,12 @@ class Event extends Facade {
     } else {
       throw Exception('Failed to load album');
     }
+  }
+
+  Future<EventParticipant?> updateParticipant(EventParticipant participant) async {
+    var userModel  = UserUpdateModel.fromUser(participant.user);
+    await client.user.update(participant.userId, userModel);
+    await client.put("/event/participant/${participant.id}", {"role_id": participant.roleId});
+    return getEventParticipant(participant.eventId, participant.user.runetId);
   }
 }
