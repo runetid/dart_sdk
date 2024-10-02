@@ -158,10 +158,14 @@ class Event extends Facade {
     }
   }
 
+  Future chengeRole(int participantId, int newRoleId) {
+    return client.put("/event/participant/${participantId}", {"role_id": newRoleId});
+  }
+
   Future<EventParticipant?> updateParticipant(EventParticipant participant) async {
     var userModel  = UserUpdateModel.fromUser(participant.user);
     await client.user.update(participant.userId, userModel);
-    await client.put("/event/participant/${participant.id}", {"role_id": participant.roleId});
+    await chengeRole(participant.id, participant.roleId);
     return getEventParticipant(participant.eventId, participant.user.runetId);
   }
 }
