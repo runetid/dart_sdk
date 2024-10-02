@@ -26,4 +26,6 @@ class EventParticipant {
 
 
   static EventParticipant fromJson(Map<String, dynamic> json) => _$EventParticipantFromJson(json);
+
+  Map<String, dynamic> toJson() => _$EventParticipantToJson(this);
 }

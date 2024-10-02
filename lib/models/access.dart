@@ -16,4 +16,6 @@ class Access {
   Access(this.id, this.eventId, this.userId, this.createdAt);
 
   static Access fromJson(Map<String, dynamic> json) => _$AccessFromJson(json);
+
+  Map<String, dynamic> toJson() => _$AccessToJson(this);
 }

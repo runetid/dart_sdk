@@ -15,4 +15,6 @@ class Podcast {
   Podcast(this.id, this.title, this.sort, this.url, this.createdAt);
 
   static Podcast fromJson(Map<String, dynamic> json) => _$PodcastFromJson(json);
+
+  Map<String, dynamic> toJson() => _$PodcastToJson(this);
 }

@@ -79,6 +79,8 @@ class Event {
   }
 
   get isPlaceEmpty => getPlaceName().isEmpty;
+
+  Map<String, dynamic> toJson() => _$EventToJson(this);
 }
 
 class EventListResponse {

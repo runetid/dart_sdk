@@ -19,4 +19,6 @@ class EventRole {
   EventRole(this.id, this.title, this.code, this.color);
 
   static EventRole fromJson(Map<String, dynamic> json) => _$EventRoleFromJson(json);
+
+  Map<String, dynamic> toJson() => _$EventRoleToJson(this);
 }

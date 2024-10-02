@@ -9,4 +9,6 @@ class EventPlace {
   EventPlace(this.id, this.place);
 
   static EventPlace fromJson(Map<String, dynamic> json) => _$EventPlaceFromJson(json);
+
+  Map<String, dynamic> toJson() => _$EventPlaceToJson(this);
 }
