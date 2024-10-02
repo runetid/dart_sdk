@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:runetid_sdk/facade/Facade.dart';
+import 'package:runetid_sdk/facade/facade.dart';
 import 'package:runetid_sdk/models/login_model.dart';
 import 'package:runetid_sdk/models/register.dart';
 import 'package:runetid_sdk/models/user.dart' as model;

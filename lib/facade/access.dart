@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:runetid_sdk/facade/Facade.dart';
+import 'package:runetid_sdk/facade/facade.dart';
 import 'package:runetid_sdk/models/badge.dart';
 import 'package:runetid_sdk/models/event_participant.dart';
 import 'package:runetid_sdk/models/access.dart' as model;

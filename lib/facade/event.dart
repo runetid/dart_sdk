@@ -1,5 +1,5 @@
 import 'package:intl/intl.dart';
-import 'package:runetid_sdk/facade/Facade.dart';
+import 'package:runetid_sdk/facade/facade.dart';
 import 'package:runetid_sdk/models/even_role.dart';
 import 'package:runetid_sdk/models/event.dart' as model;
 import 'package:runetid_sdk/models/event_participant.dart';
@@ -159,7 +159,7 @@ class Event extends Facade {
   }
 
   Future chengeRole(int participantId, int newRoleId) {
-    return client.put("/event/participant/${participantId}", {"role_id": newRoleId});
+    return client.put("/event/participant/$participantId", {"role_id": newRoleId});
   }
 
   Future<EventParticipant?> updateParticipant(EventParticipant participant) async {

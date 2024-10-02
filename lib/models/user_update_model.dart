@@ -1,5 +1,4 @@
 
-import 'package:runetid_sdk/models/event_participant.dart';
 import 'package:runetid_sdk/models/user.dart';
 
 class UserUpdateModel {

@@ -6,7 +6,7 @@ import 'package:dio/dio.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 import 'package:crypto/crypto.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
-import 'package:runetid_sdk/facade/User.dart';
+import 'package:runetid_sdk/facade/user.dart';
 import 'package:runetid_sdk/facade/access.dart';
 import 'package:runetid_sdk/facade/event.dart';
 
