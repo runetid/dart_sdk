@@ -77,7 +77,7 @@ class User extends Facade {
 
   Future<model.User?> update(int userId, UserUpdateModel data) {
 
-    return client.post("/user/$userId", jsonEncode(data.toJson())).then((resp) {
+    return client.put("/user/$userId", jsonEncode(data.toJson())).then((resp) {
       if (resp.statusCode != 200) {
         return null;
       }
