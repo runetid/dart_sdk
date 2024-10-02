@@ -168,4 +168,16 @@ class Event extends Facade {
     await chengeRole(participant.id, participant.roleId);
     return getEventParticipant(participant.eventId, participant.user.runetId);
   }
+
+  Future<EventParticipant?> setParticipantData(int participantId, Map<String, dynamic> data) async {
+    final response = await client.put("/event/participant/$participantId/data", data);
+
+    if (response.statusCode == 200) {
+      var resp = response.data as Map<String, dynamic>;
+
+      return EventParticipant.fromJson(resp['data']);
+    } else {
+      throw Exception('Failed to load participant');
+    }
+  }
 }

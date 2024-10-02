@@ -3,6 +3,7 @@
 * Fetch event roles
 * Update participant method
 * Update user update model
+* Set participant attributes method
 
 ## 1.0.1
 
