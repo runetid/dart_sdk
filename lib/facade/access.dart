@@ -40,25 +40,29 @@ class Access extends Facade {
     }
   }
 
-  Future<Badge?> setBadge(EventParticipant participant, int operatorId) async {
+  Future<Badge?> setBadge(EventParticipant participant, int operatorId, String printer ) async {
 
     var data = {
       "event_id": participant.eventId,
       "operator_id" : operatorId,
       "user_id": participant.userId,
-      "role_id": participant.roleId
+      "role_id": participant.roleId,
+      "id": 1,
+      "created_at": DateTime.timestamp().toString(),
+      "printer": printer,
     };
 
     final response = await client.post("/storage/badge", jsonEncode(data));
 
-    if (response.statusCode == 200) {
-      final data = response.data["data"] as Map<String, dynamic>;
 
+    // if (response.statusCode == 200) {
+      // final data = response.data["data"] as Map<String, dynamic>;
+      //
       Badge result = Badge.fromJson(data);
-
+      //
       return result;
-    } else {
-      return null;
-    }
+    // } else {
+    //   return null;
+    // }
   }
 }
