@@ -10,17 +10,15 @@ import 'package:runetid_sdk/facade/user.dart';
 import 'package:runetid_sdk/facade/access.dart';
 import 'package:runetid_sdk/facade/event.dart';
 
+
 class HttpClient {
   static const userAgent = 'mobile/0.1';
   static const server = 'https://api.runet.id';
 
+  final void Function(Object object) logPrint;
+
   Dio client = Dio()
     ..interceptors.addAll([
-      PrettyDioLogger(
-          requestBody: false,
-          requestHeader: false,
-          responseBody: false,
-          responseHeader: false),
       DioCacheInterceptor(
           options: CacheOptions(
         store: MemCacheStore(maxSize: 10485760, maxEntrySize: 1048576),
@@ -28,9 +26,9 @@ class HttpClient {
       )),
     ]);
 
-  HttpClient(String apiKey, String apiSecret) {
+  HttpClient(String apiKey, String apiSecret, {this.logPrint=print}) {
     client.options.followRedirects = true;
-    client.interceptors.add(InterceptorsWrapper(
+    client.interceptors.addAll([InterceptorsWrapper(
         onRequest: (RequestOptions options, RequestInterceptorHandler handler) {
       var time = DateTime.now().millisecondsSinceEpoch;
       var hash = _generateMd5(apiKey + time.toString() + apiSecret);
@@ -40,7 +38,16 @@ class HttpClient {
       options.headers['Time'] = time.toString();
 
       return handler.next(options);
-    }));
+    }),
+
+      PrettyDioLogger(
+          requestBody: false,
+          requestHeader: false,
+          responseBody: false,
+          responseHeader: false,
+          logPrint: logPrint
+      ),
+    ]);
   }
 
   final Map<String, String> _headers = {'User-Agent': userAgent};
