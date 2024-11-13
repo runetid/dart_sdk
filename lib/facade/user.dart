@@ -56,8 +56,16 @@ class User extends Facade {
       if (resp.statusCode != 200) {
         return null;
       }
+
       var r = resp.data as Map<String, dynamic>;
-      return getUserByToken(r['token']);
+
+      var u = model.User.fromJson(r['data']);
+
+      if (u.id < 1) {
+        return null;
+      }
+
+      return u;
     });
   }
 
