@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:intl/intl.dart';
 import 'package:runetid_sdk/facade/facade.dart';
 import 'package:runetid_sdk/models/even_role.dart';
@@ -160,6 +162,24 @@ class Event extends Facade {
 
   Future chengeRole(int participantId, int newRoleId) {
     return client.put("/event/participant/$participantId", {"role_id": newRoleId});
+  }
+
+  Future<EventParticipant?> register(int userId, int eventId, int roleId) async {
+    var data = {
+      "event_id": eventId,
+      "user_id": userId,
+      "role_id": roleId,
+    };
+
+    final response = await client.post("/event/register/", jsonEncode(data));
+
+    if (response.statusCode == 200) {
+      var resp = response.data as Map<String, dynamic>;
+
+      return EventParticipant.fromJson(resp['data']);
+    } else {
+      throw Exception('Failed to load participant');
+    }
   }
 
   Future<EventParticipant?> updateParticipant(EventParticipant participant) async {
