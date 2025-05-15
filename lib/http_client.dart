@@ -22,7 +22,7 @@ class HttpClient {
       DioCacheInterceptor(
           options: CacheOptions(
         store: MemCacheStore(maxSize: 10485760, maxEntrySize: 1048576),
-        hitCacheOnErrorExcept: [], // for offline behaviour
+        hitCacheOnErrorCodes: [], // for offline behaviour
       )),
     ]);
 
